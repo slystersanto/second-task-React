@@ -1,177 +1,104 @@
-import { useState } from "react";
+import logo from './logo.svg';
 import './App.css';
-
+import Nav from './Nav.js';
+import Content from './Content';
+import { useState } from 'react';
 
 
 function App() {
+  const [cart, setCart] = useState(0);
   const data = [
-
     {
-
-      sale: ".",
-      title: "450❌300",
-      sub_title: "Fancy Product",
-      rating: ".",
-      price: "$40.00-$80.00",
-      btn: "View Options",
-
+      h5: "Fancy product",
+      islinethrough:false,
+      price: "$40.00 - $80.00",
+      price1: "",
+      star: "",
     },
     {
-      sale: <span>Sale</span>,
-      title: "450❌300",
-      sub_title: "Special Item",
-      rating: "⭐⭐⭐⭐⭐",
-      price: <s>$20.00</s>,
-      str: "$18.00",
-      btn: "Add to cart",
-
+      h5: "Special Item",
+      islinethrough:true,
+      price:"$20.00" ,
+      price1: "$18.00",
+      star: "⭐⭐⭐⭐⭐",
     },
     {
-      sale: <span>Sale</span>,
-      title: "450❌300",
-      sub_title: "Sale Item",
-      rating: ".",
-      price: <s>$50.00</s>,
-      str: "$25.00",
-      btn: "Add to cart",
-
+      h5: "Sale Item",
+      islinethrough:true,
+      price: "$50.00",
+      price1: "$25.00",
+      star: "",
     },
     {
-      sale: ".",
-      title: "450❌300",
-      sub_title: "Popular Item",
-      rating: "⭐⭐⭐⭐⭐",
+      h5: "Popular Item",
+      islinethrough:false,      
       price: "$40.00",
-      btn: "Add to cart",
-
+      price1: "",
+      star: "⭐⭐⭐⭐⭐",
     },
     {
-      sale: <span>Sale</span>,
-      title: "450❌300",
-      sub_title: "Sale Item",
-      rating: ".",
-      price: <s>$50.00</s>,
-      str: "$25.00",
-      btn: "Add to cart",
-
+      h5: "Sale Item",
+      islinethrough:true,
+      price: "$50.00",
+      price1:"$25.00",
+      star: "",
     },
     {
-      sale: ".",
-      title: "450❌300",
-      sub_title: "Fancy Product",
-      rating: ".",
-      price: "$120.00-$280.00",
-      btn: "View options",
-
+      h5: "Fancy product",
+      islinethrough:false,
+      price: "$120.00 - $280.00",
+      price1: "",
+      star: "",
     },
     {
-      sale: <span>Sale</span>,
-      title: "450❌300",
-      sub_title: "Special Item",
-      rating: "⭐⭐⭐⭐⭐",
-      price: <s>$20.00</s>,
-      str: " $18.00",
-      btn: "Add to cart",
-
+      h5: "Special Item",
+      islinethrough:true,
+      price: "$20.00",
+      price1: "$18.00",
+      star: "⭐⭐⭐⭐⭐",
     },
     {
-      sale: ".",
-      title: "450❌300",
-      sub_title: "Popular Item",
-      rating: "⭐⭐⭐⭐⭐",
+      h5: "Popular Item",
+      islinethrough:false,
       price: "$40.00",
-      btn: "Add to cart",
+      price1: "",
+      star: "⭐⭐⭐⭐⭐",
+    }
+  ]
 
-    },
-  ];
-
-  // const [item, setItem] = useState(0);
-  const [count,setCount]=useState(0);
   return (
     <div className="App">
-     <div> <span id='cart'>🛒Cart{count}</span></div>
-<div>
-
-      <div className='header'>Shop in Style <br></br><span className="header-1"> With this shop hompeage template</span></div>
-      
-      </div>
-      {data.map((item, index) => (
-
-        <Subscription
-          key={index}
-          heading={item.heading}
-          sale={item.sale}
-          title={item.title}
-          sub_title={item.sub_title}
-          rating={item.rating}
-          price={item.price}
-          str={item.str}
-          btn={item.btn}
-          index={index}
-          count={count}
-          setCount={setCount}
-          
-         
-
-        />
-      ))}
-      <div><p className='footer'>Copyright ©️ Your Website 2023</p></div>
-
-    </div>
-
-  );
-}
-
-
-
-
-export default App;
-
-
-function Subscription({sale,title,sub_title,rating,str,btn,index,price,count,setCount}) {
- 
-  const [showBtn, setShowBtn] = useState(true);
-  
-  const handleCartAdd = () => {
-    setShowBtn(!showBtn);
-    setCount(count+1);
-
-
-  }
-  const handleCartRemove=()=>{
-    setShowBtn(!showBtn)
-    setCount(count-1);
-  }
-  return (
-
-    <div className='container'>
-      
-      <div className='cards'>
-        <div id="sale">{sale}</div>
-        <p className='title'>{title}</p>
-        <hr></hr>
-        <p className="sub-title">{sub_title}</p>
-        <p className='rating'>{rating} </p>
-        <p className='str'>{price} {str}</p>
-        {/* <button type="button" onClick={()=>handleCartAdd()}>{showBtn ? (btn) : <p onClick={()=>removeCard()} > remove </p>} </button> */}
-        { showBtn ?  <button type="button" onClick={()=>handleCartAdd()} className="btn"> {btn} </button> :  <button  type="button"onClick={()=>handleCartRemove()} className="btn">remove</button>}  
-
-        <div>
-
+      <Nav cartCount={cart} />
+      <Head />
+      <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+          <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {data.map((ele) => <Content content={ele} cart={cart} setCart={setCart}/>)}
+          </div>
         </div>
-
-
-      </div>
+      </section>
+      <Foot />
     </div>
-
+  );
+};
+function Head() {
+  return (
+    <header class="bg-dark py-5">
+      <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+          <h1 class="display-4 fw-bolder">Shop in style</h1>
+          <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+        </div>
+      </div>
+    </header>
   )
 }
 
-
-
-
-
-
-
-
-
+function Foot() {
+  return (
+    <footer class="py-5 bg-dark">
+      <div class="container"><p class="m-0 text-center text-white">Copyright © Your Website 2022</p></div>
+    </footer>
+  )
+}
+export default App;
